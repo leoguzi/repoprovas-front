@@ -1,11 +1,18 @@
 import styled from 'styled-components';
 import { colors } from '../globalStyles';
 
-export default function TextInput({ placeholder, label }) {
+export default function TextInput({ placeholder, label, value, setValue }) {
   return (
     <TextInputContainer>
-      <Label for='TextInput'>{label}</Label>
-      <Input id='TextInput' type='text' placeholder={placeholder} />
+      <Label htmlfor='TextInput'>{label}</Label>
+      <Input
+        required
+        value={value}
+        id='TextInput'
+        type='text'
+        placeholder={placeholder}
+        onChange={(e) => setValue(e.target.value)}
+      />
     </TextInputContainer>
   );
 }

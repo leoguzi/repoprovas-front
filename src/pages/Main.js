@@ -8,7 +8,7 @@ export default function Main() {
   return (
     <>
       <Title>RepoProvas</Title>
-      <Container marginTop='160px' width='1000px'>
+      <Container marginTop='100px' width='1000px'>
         <Link to='/register'>
           <Button
             color={colors.button}
@@ -34,7 +34,7 @@ export default function Main() {
 
 const Title = styled.h1`
   font-family: 'Lobster', cursive;
-  margin-top: 150px;
+  margin-top: 100px;
   color: ${colors.standardText};
   font-size: 88px;
   text-align: center;

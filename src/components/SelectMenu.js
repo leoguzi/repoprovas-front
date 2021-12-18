@@ -1,14 +1,30 @@
 import styled from 'styled-components';
 import { colors } from '../globalStyles';
 
-export default function SelectMenu({ items, label }) {
+export default function SelectMenu({
+  items,
+  label,
+  stdValue,
+  value,
+  setValue,
+}) {
   return (
     <SelectContainer>
       <Label htmlFor='SelectMenu'>{label}</Label>
-      <Select id='SelectMenu'>
-        {items.map((item) => (
-          <option>{item}</option>
-        ))}
+      <Select
+        value={value}
+        id='SelectMenu'
+        onChange={(e) => setValue(Number(e.target.value))}
+      >
+        {stdValue ? (
+          <option>{stdValue}</option>
+        ) : (
+          items?.map((item, index) => (
+            <option key={index} value={item.id}>
+              {item.name}
+            </option>
+          ))
+        )}
       </Select>
     </SelectContainer>
   );
