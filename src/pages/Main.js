@@ -1,24 +1,32 @@
 import styled from 'styled-components';
-import Button from '../components/button';
-import Container from '../components/container';
+import { Link } from 'react-router-dom';
+import Button from '../components/Button';
+import Container from '../components/Container';
 import { colors } from '../globalStyles';
 
 export default function Main() {
   return (
     <>
       <Title>RepoProvas</Title>
-      <Container marginTop='200px' width='1000px'>
-        <Button
-          color={colors.button}
-          textColor={colors.standardText}
-          text='Register test'
-        />
-
-        <Button
-          color={colors.button}
-          textColor={colors.standardText}
-          text='Search test'
-        />
+      <Container marginTop='160px' width='1000px'>
+        <Link to='/register'>
+          <Button
+            color={colors.button}
+            textColor={colors.standardText}
+            text='Register test'
+            width='300px'
+            height='80px'
+          />
+        </Link>
+        <Link to='/search'>
+          <Button
+            color={colors.button}
+            textColor={colors.standardText}
+            text='Search test'
+            width='300px'
+            height='80px'
+          />
+        </Link>
       </Container>
     </>
   );

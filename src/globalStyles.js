@@ -1,8 +1,9 @@
 const { createGlobalStyle } = require('styled-components');
 
 const colors = {
-  backgound: '#05445E',
-  button: '#189AB4',
+  themePrimary: '#05445E',
+  themeSecondary: '#189AB4',
+  cancelButton: '#DF362D',
   standardText: '#D4F1F4',
 };
 
@@ -38,7 +39,7 @@ footer, header, hgroup, menu, nav, section {
 	display: block;
 }
 body {
-	background-color: ${colors.backgound};
+	background-color: ${colors.themePrimary};
 	line-height: 1;
     font-family: 'Roboto', sans-serif;
 }
