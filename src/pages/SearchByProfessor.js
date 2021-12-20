@@ -13,6 +13,7 @@ export default function SearchByProfessor() {
   const [professors, setProfessors] = useState([]);
   const [professor, setProfessor] = useState(0);
   const [tests, setTests] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     apiService.getProfessors().then((r) => {
@@ -23,9 +24,10 @@ export default function SearchByProfessor() {
 
   useEffect(() => {
     if (professor) {
-      apiService
-        .getTestsByProfessor(professor)
-        .then((res) => setTests(res.data));
+      apiService.getTestsByProfessor(professor).then((res) => {
+        setTests(res.data);
+        setLoading(false);
+      });
     }
   }, [professor]);
 
@@ -47,7 +49,7 @@ export default function SearchByProfessor() {
           />
         </Link>
       </FormContainer>
-      <TestsList itens={tests} />
+      <TestsList itens={tests} loading={loading} />
     </SearchContainer>
   );
 }

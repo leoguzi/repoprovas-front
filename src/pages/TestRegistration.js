@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { PacmanLoader } from 'react-spinners';
+import { css } from '@emotion/react';
 import styled from 'styled-components';
 import Button from '../components/Button';
 import Container from '../components/Container';
@@ -20,6 +22,8 @@ export default function TestRegistration() {
   const [category, setCategory] = useState(0);
   const [discipline, setDiscipline] = useState(0);
   const [professor, setProfessor] = useState(0);
+  const [invalidFields, setInvalidFields] = useState({});
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     apiService.getCategories().then((r) => {
@@ -30,6 +34,7 @@ export default function TestRegistration() {
       setDisciplines(r.data);
       setDiscipline(r.data[0].id);
       setProfessor(r.data[0].professors[0].id);
+      setLoading(false);
     });
   }, []);
 
@@ -42,9 +47,9 @@ export default function TestRegistration() {
   function handleSubmit(e) {
     e.preventDefault();
     if (!isValidName(name)) {
-      alert("Name must have the 'YYYY.S' format!");
+      setInvalidFields({ ...invalidFields, name: true });
     } else if (!isValidLink(link)) {
-      alert('The URL must be valid');
+      setInvalidFields({ ...invalidFields, link: true });
     } else {
       const formInfo = {
         name,
@@ -58,52 +63,66 @@ export default function TestRegistration() {
   }
 
   return (
-    <Container width='500px' marginTop='100px'>
-      <PageTitle>Register a new test</PageTitle>
-      <StyledForm onSubmit={(e) => handleSubmit(e)}>
-        <TextInput
-          value={name}
-          setValue={setName}
-          placeholder='Ex: 2020.1'
-          label='Test name:'
-        />
-        <TextInput
-          value={link}
-          setValue={setLink}
-          placeholder='Ex: https://drive.google.com/file.../'
-          label='Test file url:'
-        />
-        <SelectMenu
-          itens={categories}
-          label='Category:'
-          value={category}
-          setValue={setCategory}
-        />
-        <SelectMenu
-          itens={disciplines}
-          label='Discipline:'
-          value={discipline}
-          setValue={setDiscipline}
-        />
-        <SelectMenu
-          itens={professors}
-          label='Professor:'
-          value={professor}
-          setValue={setProfessor}
-        />
-        <ButtonsContainer>
-          <Button type='submit' text='Submit' width='115px' height='40px' />
-          <Link to='/'>
-            <Button
-              text='Cancel'
-              width='115px'
-              height='40px'
-              color={colors.cancelButton}
+    <>
+      <PacmanLoader
+        css={override}
+        color={colors.listBackground}
+        loading={loading}
+      />
+      {!loading && (
+        <Container width='500px' marginTop='100px'>
+          <PageTitle>Register a new test</PageTitle>
+          <StyledForm onSubmit={(e) => handleSubmit(e)}>
+            <TextInput
+              setInvalidFields={setInvalidFields}
+              invalid={invalidFields.name}
+              value={name}
+              setValue={setName}
+              placeholder='Ex: 2020.1'
+              label='Test name:'
             />
-          </Link>
-        </ButtonsContainer>
-      </StyledForm>
-    </Container>
+            <TextInput
+              setInvalidFields={setInvalidFields}
+              invalid={invalidFields.link}
+              value={link}
+              setValue={setLink}
+              placeholder='Ex: https://drive.google.com/file.../'
+              label='Test file url:'
+            />
+            <SelectMenu
+              loading={loading}
+              itens={categories}
+              label='Category:'
+              value={category}
+              setValue={setCategory}
+            />
+            <SelectMenu
+              itens={disciplines}
+              label='Discipline:'
+              value={discipline}
+              setValue={setDiscipline}
+            />
+            <SelectMenu
+              itens={professors}
+              label='Professor:'
+              value={professor}
+              setValue={setProfessor}
+            />
+            <ButtonsContainer>
+              <Button type='submit' text='Submit' width='115px' height='40px' />
+              <Link to='/'>
+                <Button
+                  text='Cancel'
+                  width='115px'
+                  height='40px'
+                  color={colors.cancelButton}
+                />
+              </Link>
+            </ButtonsContainer>
+          </StyledForm>
+        </Container>
+      )}
+    </>
   );
 }
 
@@ -121,4 +140,11 @@ const ButtonsContainer = styled.div`
   align-self: flex-end;
   display: flex;
   justify-content: space-between;
+`;
+
+const override = css`
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 `;

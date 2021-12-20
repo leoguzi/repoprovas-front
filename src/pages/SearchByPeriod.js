@@ -15,6 +15,7 @@ export default function SearchByPeriod() {
   const [period, setPeriod] = useState(0);
   const [discipline, setDiscipline] = useState(0);
   const [tests, setTests] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     apiService.getPeriods().then((r) => {
@@ -34,7 +35,10 @@ export default function SearchByPeriod() {
 
   useEffect(() => {
     if (discipline) {
-      apiService.getTestsByDiscipline(discipline).then((r) => setTests(r.data));
+      apiService.getTestsByDiscipline(discipline).then((r) => {
+        setTests(r.data);
+        setLoading(false);
+      });
     }
   }, [discipline]);
 
@@ -57,7 +61,7 @@ export default function SearchByPeriod() {
           />
         </Link>
       </FormContainer>
-      <TestsList itens={tests} />
+      <TestsList itens={tests} loading={loading} />
     </SearchContainer>
   );
 }

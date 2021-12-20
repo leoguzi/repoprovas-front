@@ -7,6 +7,7 @@ const colors = {
   standardText: '#FFFFFF',
   listBackground: '#D4F1F4',
   pfdIcon: '#FF4500',
+  red: '#FF0000',
 };
 
 const GlobalStyle = createGlobalStyle`

@@ -41,6 +41,6 @@
     "func-names": ["error", "as-needed"],
     "react/react-in-jsx-scope": "off",
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
-    "no-alert": "off"
+    "no-use-before-define": "off"
   }
 }

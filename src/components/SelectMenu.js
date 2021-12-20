@@ -5,8 +5,8 @@ export default function SelectMenu({
   itens,
   label,
   stdValue,
-  value,
   setValue,
+  value,
 }) {
   return (
     <SelectContainer>
