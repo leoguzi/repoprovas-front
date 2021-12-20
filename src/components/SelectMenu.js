@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { colors } from '../globalStyles';
 
 export default function SelectMenu({
-  items,
+  itens,
   label,
   stdValue,
   value,
@@ -19,9 +19,9 @@ export default function SelectMenu({
         {stdValue ? (
           <option>{stdValue}</option>
         ) : (
-          items?.map((item, index) => (
+          itens?.map((item, index) => (
             <option key={index} value={item.id}>
-              {item.name}
+              {item.testsQty ? `${item.name} (${item.testsQty})` : item.name}
             </option>
           ))
         )}

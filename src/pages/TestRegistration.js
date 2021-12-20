@@ -36,6 +36,7 @@ export default function TestRegistration() {
   useEffect(() => {
     const selectedDisc = disciplines.filter((disc) => disc.id === discipline);
     setProfessors(selectedDisc[0]?.professors);
+    setProfessor(selectedDisc[0]?.professors[0].id);
   }, [discipline]);
 
   function handleSubmit(e) {
@@ -73,19 +74,19 @@ export default function TestRegistration() {
           label='Test file url:'
         />
         <SelectMenu
-          items={categories}
+          itens={categories}
           label='Category:'
           value={category}
           setValue={setCategory}
         />
         <SelectMenu
-          items={disciplines}
+          itens={disciplines}
           label='Discipline:'
           value={discipline}
           setValue={setDiscipline}
         />
         <SelectMenu
-          items={professors}
+          itens={professors}
           label='Professor:'
           value={professor}
           setValue={setProfessor}

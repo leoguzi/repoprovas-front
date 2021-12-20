@@ -4,7 +4,9 @@ const colors = {
   themePrimary: '#05445E',
   themeSecondary: '#189AB4',
   cancelButton: '#DF362D',
-  standardText: '#D4F1F4',
+  standardText: '#FFFFFF',
+  listBackground: '#D4F1F4',
+  pfdIcon: '#FF4500',
 };
 
 const GlobalStyle = createGlobalStyle`
